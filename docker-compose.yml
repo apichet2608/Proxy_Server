@@ -1,3 +1,6 @@
+# docker compose up -d --build
+# docker compose kill
+
 version: "3"
 
 services:
@@ -10,22 +13,22 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     container_name: nginx-container
 
-  app1:
+  app-1:
     image: nginx
     restart: unless-stopped
-    ports:
-      - "8081:80"
+    # ports:
+    #   - "8081:80"
     volumes:
-      - ./app1-build/default.conf:/etc/nginx/conf.d/default.conf
-      - ./app1-build/dist:/app1
-    container_name: app1-container
-
-  app2:
+      - ./app-1/default.conf:/etc/nginx/conf.d/default.conf
+      - ./app-1/dist:/projects
+    container_name: app-1-container
+  # smart-factory-dashboard
+  app-2:
     image: nginx
     restart: unless-stopped
-    ports:
-      - "8082:80"
+    # ports:
+    #   - "8081:80"
     volumes:
       - ./app2-build/default.conf:/etc/nginx/conf.d/default.conf
-      - ./app2-build/dist:/app2
-    container_name: app2-container
+      - ./app2-build/dist:/projects
+    container_name: app-2-container
