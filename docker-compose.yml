@@ -35,3 +35,20 @@ services:
       - ./app-2/default.conf:/etc/nginx/conf.d/default.conf
       - ./app-2/dist:/projects
     container_name: app-2-container
+
+  node-api:
+    # image: NODEJS latest
+    image: node:latest
+    restart: unless-stopped
+    # ports:
+    #   - "3000:3000"
+    volumes:
+      - ./Smart-Api/:/projects
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "1"
+    command: ["node", "/projects/bin/www"]
+    working_dir: /projects
+    container_name: nodeapi-Smart-Api
